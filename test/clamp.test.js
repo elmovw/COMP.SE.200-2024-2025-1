@@ -329,7 +329,31 @@ describe('clamp()', function () {
         });
     });
 
+    it('clamps number with good precision', function () {
+        let res = clamp(1.0, 1.1, 2.0);
+        assert.equal(res, 1.1);
+        res = clamp(1.0, 1.01, 2.0);
+        assert.equal(res, 1.01);
+        res = clamp(1.0, 1.000001, 2.0);
+        assert.equal(res, 1.000001);
+    });
+
+    it('clamps big number with extreme (but safe) limits', function () {
+        let res = clamp(Number.MAX_SAFE_INTEGER-2, Number.MAX_SAFE_INTEGER-2, Number.MAX_SAFE_INTEGER);
+        assert.equal(res, Number.MAX_SAFE_INTEGER-1);
+        res = clamp(Number.MIN_SAFE_INTEGER+2, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER+1);
+        assert.equal(res, Number.MIN_SAFE_INTEGER);
+    });
+    
+
     // NEGATIVE CASES
+
+    it('throws error if parameters are too extreme', function () {
+        assert.throws(() => clamp(Number.MAX_SAFE_INTEGER-2, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER+1));
+        assert.throws(() => clamp(Number.MIN_SAFE_INTEGER+2, Number.MIN_SAFE_INTEGER-1, Number.MIN_SAFE_INTEGER));
+        assert.throws(() => clamp(Number.MAX_SAFE_INTEGER+1, Number.MAX_SAFE_INTEGER-1, Number.MAX_SAFE_INTEGER));
+        assert.throws(() => clamp(Number.MIN_SAFE_INTEGER-1, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER+1));
+    });
 
     it('throws error if limits are negative but wrong way around', function () {
         const params = [
