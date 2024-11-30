@@ -41,7 +41,7 @@ describe('clamp()', function () {
         });
     });
 
-    describe('with two positive limits', function () {
+    describe('with two different positive limits', function () {
         it('clamps negative input number outside of limits', function () {
             const res = clamp(-10, 1, 5);
             assert.equal(res, 1);
@@ -78,7 +78,7 @@ describe('clamp()', function () {
         });
     });
 
-    describe('with two negative limits', function () {
+    describe('with two different negative limits', function () {
         it('clamps positive', function () {
             const res = clamp(10, -10, -5);
             assert.equal(res, -5);
@@ -169,5 +169,76 @@ describe('clamp()', function () {
         });
     });
 
+
+    describe('with two same positive limits', function () {
+        it('clamps negative input number outside of limits', function () {
+            const res = clamp(-10, 5, 5);
+            assert.equal(res, 5);
+        });
+    
+        it('clamps number over the upper limit', function () {
+            const res = clamp(10, 5, 5);
+            assert.equal(res, 5);
+        });
+
+        it('clamps positive number under the lower limit', function () {
+            const res = clamp(1, 5, 5);
+            assert.equal(res, 5);
+        });
+
+        it('clamps zero', function () {
+            const res = clamp(0, 5, 5);
+            assert.equal(res, 5);
+        });
+    
+        it('clamps limit to itself', function () {
+            const res = clamp(5, 5, 5);
+            assert.equal(res, 5);
+        });
+    });
+
+    describe('with two same negative limits', function () {
+        it('clamps positive', function () {
+            const res = clamp(10, -5, -5);
+            assert.equal(res, -5);
+        });
+    
+        it('clamps negative input number over the limit', function () {
+            const res = clamp(-3, -5, -5);
+            assert.equal(res, -5);
+        });
+
+        it('clamps negative input number under the limit', function () {
+            const res = clamp(-11, -5, -5);
+            assert.equal(res, -5);
+        });
+
+        it('clamps zero', function () {
+            const res = clamp(0, -5, -5);
+            assert.equal(res, -5);
+        });
+    
+        it('clamps limit to itself', function () {
+            const res = clamp(-5, -5 -5);
+            assert.equal(res, -5);
+        });
+    });
+
+    describe('with two zero limits', function () {
+        it('clamps positive', function () {
+            const res = clamp(10, 0, 0);
+            assert.equal(res, 0);
+        });
+    
+        it('clamps negative', function () {
+            const res = clamp(-3, 0, 0);
+            assert.equal(res, 0);
+        });
+
+        it('clamps zero to itself', function () {
+            const res = clamp(0, 0, 0);
+            assert.equal(res, 0);
+        });
+    });
 
 });
