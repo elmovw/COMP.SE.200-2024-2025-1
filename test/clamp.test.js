@@ -4,6 +4,8 @@ import clamp from '../src/clamp.js'
 
 describe('clamp()', function () {
 
+    // HAPPY CASES
+
     describe('with negative and positive limit', function () {
         it('clamps negative input number outside of limits', function () {
             const res = clamp(-10, -5, 5);
@@ -239,6 +241,70 @@ describe('clamp()', function () {
             const res = clamp(0, 0, 0);
             assert.equal(res, 0);
         });
+    });
+
+    // NEGATIVE CASES
+
+    it('throws error if limits are negative but wrong way around', function () {
+        const params = [
+            [-3, -5, -10],
+            [-3, 0, -10],
+            [-3, 9, 0],
+            [-3, 4, 1],
+        ];
+        for (let i = 0; i<params.length; i++) {
+            assert.throws(() => clamp(...params[i]), Error);
+        }
+    });
+
+    // wrong type of parameters
+
+    it('throws error if one of the parametersr is null', function () {
+        const params = [
+            [null, 1, 2],
+            [0, null, 2],
+            [0, 1, null],
+        ];
+        for (let i = 0; i<params.length; i++) {
+            assert.throws(() => clamp(...params[i]), Error);
+        }
+    });
+
+    it('throws error if one of the parametersr is undefined', function () {
+        const params = [
+            [undefined, 1, 2],
+            [0, undefined, 2],
+            [0, 1, undefined],
+        ];
+        for (let i = 0; i<params.length; i++) {
+            assert.throws(() => clamp(...params[i]), Error);
+        }
+    });
+
+    it('throws error if one of the parametersr is NaN', function () {
+        const params = [
+            [NaN, 1, 2],
+            [0, NaN, 2],
+            [0, 1, NaN],
+        ];
+        for (let i = 0; i<params.length; i++) {
+            assert.throws(() => clamp(...params[i]), Error);
+        }
+    });
+
+    it('throws error if one or all of the parameters is string', function () {
+        const params = [
+            ['0', 1, 2],
+            [0, '1', 2],
+            [0, 1, '2'],
+        ];
+        for (let i = 0; i<params.length; i++) {
+            assert.throws(() => clamp(...params[i]), Error);
+        }
+    });
+
+    it('throws error if one or all of the parameters are strings', function () {
+        assert.throws(() => clamp('0', '1', '2'), Error);
     });
 
 });
