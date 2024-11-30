@@ -16,7 +16,7 @@ describe('add()', function () {
     }
   });
 
-  it('adds string representing numbers', function () {
+  it('adds string representing decimal numbers', function () {
     // a, b, result
     const cases = [
       [1, "1", "11"],
