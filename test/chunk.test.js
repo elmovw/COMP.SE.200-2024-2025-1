@@ -13,4 +13,86 @@ describe('chunk()', function () {
         const res = chunk(['a', 'b', 'c', 'd'], 2);
         assert.deepEqual(res, [['a', 'b'], ['c', 'd']]);
     })
+
+    it('works without second parameter', function () {
+        const res = chunk(['a', 'b', 'c', 'd']);
+        assert.deepEqual(res, [['a'], ['b'], ['c'], ['d']]);
+    })
+
+    it('chunks a string like an array', function () {
+        const res = chunk("cat");
+        console.log(res);
+        assert.deepEqual(res, [['c'], ['a'], ['t']]);
+    });
+
+    it('works with arrays containing different types of elements', function () {
+        const arr = [
+            {1: 1, 2:2, 3:3, b:5},
+            null,
+            undefined,
+            NaN,
+            {},
+            1,
+            0.2,
+            "cat",
+            "c"
+        ];
+        const res = chunk(arr, 1);
+        assert.deepEqual(res, [
+            [{1: 1, 2:2, 3:3, b:5}],
+            [null],
+            [undefined],
+            [NaN],
+            [{}],
+            [1],
+            [0.2],
+            ["cat"],
+            ["c"]
+        ]);
+    })
+
+    it('returns empty array if first parameter is not array or string', function () {
+        const params = [
+            {1: 1, 2:2, 3:3, b:5},
+            null,
+            undefined,
+            NaN,
+            {},
+            1,
+            0.2
+        ];
+        for (let i=0; i<params.length; i++) {
+            assert.deepEqual(chunk(params[i], 1), []);
+        }
+    });
+
+    it('chunks an empty array', function () {
+        assert.deepEqual(chunk([,,,,,], 2), [[,,], [,,], [,]]);
+    });
+
+    it('chunks partially empty array', function () {
+        assert.deepEqual(chunk([1,,4,,,], 2), [[1,], [4,,], [,]]);
+    });
+
+    // NEGATIVE TESTS
+
+    it('throws error if second parameter is given but is not a positive integer', function () {
+        const params = [
+            0,
+            -2,
+            1.2,
+            'a',
+            'test',
+            null,
+            undefined,
+            NaN,
+            [],
+            {},
+            [1, 2],
+            { 1: 'a'}
+        ];
+        for (let i=0; i<params.length; i++) {
+            assert.throws(() => chunk([1, 2, 3], params[i]), Error);
+        }
+    });
 });
