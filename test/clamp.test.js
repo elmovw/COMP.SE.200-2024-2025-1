@@ -369,51 +369,26 @@ describe('clamp()', function () {
 
     // wrong type of parameters
 
-    it('throws error if one of the parameters is null', function () {
+    it('throws error if some of the parameters is not number', function () {
         const params = [
-            [null, 1, 2],
-            [0, null, 2],
-            [0, 1, null],
+            {},
+            {"kissa": 2},
+            undefined,
+            NaN,
+            null,
+            () => "kissa",
+            "kissa",
+            "",
+            "1"
         ];
         for (let i = 0; i<params.length; i++) {
-            expect(() => clamp(...params[i])).to.throw(Error);
+            expect(() => clamp(params[i], 2, 3)).to.throw(Error);
+            expect(() => clamp(1, params[i], 3)).to.throw(Error);
+            expect(() => clamp(1, 2, params[i])).to.throw(Error);
         }
     });
 
-    it('throws error if one of the parameters is undefined', function () {
-        const params = [
-            [undefined, 1, 2],
-            [0, undefined, 2],
-            [0, 1, undefined],
-        ];
-        for (let i = 0; i<params.length; i++) {
-            expect(() => clamp(...params[i])).to.throw(Error);
-        }
-    });
-
-    it('throws error if one of the parameters is NaN', function () {
-        const params = [
-            [NaN, 1, 2],
-            [0, NaN, 2],
-            [0, 1, NaN],
-        ];
-        for (let i = 0; i<params.length; i++) {
-            expect(() => clamp(...params[i])).to.throw(Error);
-        }
-    });
-
-    it('throws error if one or all of the parameters is string', function () {
-        const params = [
-            ['0', 1, 2],
-            [0, '1', 2],
-            [0, 1, '2'],
-        ];
-        for (let i = 0; i<params.length; i++) {
-            expect(() => clamp(...params[i])).to.throw(Error);
-        }
-    });
-
-    it('throws error if one or all of the parameters are strings', function () {
+    it('throws error if one or all of the parameters are strings representing numbers', function () {
         expect(() => clamp('0', '1', '2')).to.throw(Error);
     });
 
