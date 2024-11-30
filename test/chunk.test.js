@@ -44,7 +44,7 @@ describe('chunk()', function () {
             1,
             0.2,
             "cat",
-            "c"
+            "c",
         ];
         const res = chunk(arr, 1);
         expect(res).to.deep.eql([
@@ -56,7 +56,7 @@ describe('chunk()', function () {
             [1],
             [0.2],
             ["cat"],
-            ["c"]
+            ["c"],
         ]);
     })
 
@@ -96,6 +96,9 @@ describe('chunk()', function () {
     // NEGATIVE TESTS
 
     it('throws error if second parameter is given but is not an integer', function () {
+        function name(t) {
+            return t;
+        }
         const params = [
             0.5,
             1.2,
@@ -109,7 +112,9 @@ describe('chunk()', function () {
             [],
             {},
             [1, 2],
-            { 1: 'a'}
+            { 1: 'a'},
+            () => "kissa",
+            name
         ];
         for (let i=0; i<params.length; i++) {
             expect(() => chunk([1, 2, 3], params[i])).to.throw(Error);
