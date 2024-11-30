@@ -4,7 +4,7 @@ import add from '../src/add.js'
 
 describe('add()', function () {
 
-  it('basic numerical addition', function () {
+  it('adds numbers', function () {
     // a, b, result
     const cases = [
       [1, 1, 2],
@@ -17,7 +17,7 @@ describe('add()', function () {
     }
   });
 
-  it ('addition with strings', function () {
+  it('adds string representing numbers', function () {
     // a, b, result
     const cases = [
       [1, "1", "11"],
