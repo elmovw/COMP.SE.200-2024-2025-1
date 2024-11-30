@@ -9,6 +9,16 @@ describe('chunk()', function () {
         assert.deepEqual(res, [[1, 2], [3, 4], [5, 6], [7]]);
     });
 
+    it('returns the input array as-is, if chunk size equals array length', function () {
+        const res = chunk([1, 2, 3, 4, 5, 6, 7], 7);
+        assert.deepEqual(res, [1, 2, 3, 4, 5, 6, 7]);
+    });
+
+    it('returns the input array as-is, if chunk size is greater than array length', function () {
+        const res = chunk([1, 2, 3, 4, 5, 6, 7], 10);
+        assert.deepEqual(res, [1, 2, 3, 4, 5, 6, 7]);
+    });
+
     it('chunks array of letters', function () {
         const res = chunk(['a', 'b', 'c', 'd'], 2);
         assert.deepEqual(res, [['a', 'b'], ['c', 'd']]);
@@ -21,7 +31,6 @@ describe('chunk()', function () {
 
     it('chunks a string like an array', function () {
         const res = chunk("cat");
-        console.log(res);
         assert.deepEqual(res, [['c'], ['a'], ['t']]);
     });
 
@@ -66,6 +75,16 @@ describe('chunk()', function () {
         }
     });
 
+    it('returns an empty array if second parameter is integer smaller than one', function () {
+        const params = [
+           0,
+           -1,
+        ];
+        for (let i=0; i<params.length; i++) {
+            assert.deepEqual(chunk(params[i], 1), []);
+        }
+    });
+
     it('chunks an empty array', function () {
         assert.deepEqual(chunk([,,,,,], 2), [[,,], [,,], [,]]);
     });
@@ -76,11 +95,12 @@ describe('chunk()', function () {
 
     // NEGATIVE TESTS
 
-    it('throws error if second parameter is given but is not a positive integer', function () {
+    it('throws error if second parameter is given but is not an integer', function () {
         const params = [
-            0,
-            -2,
+            0.5,
             1.2,
+            7.9,
+            -4.9,
             'a',
             'test',
             null,
