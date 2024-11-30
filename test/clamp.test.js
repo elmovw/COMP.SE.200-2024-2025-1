@@ -259,7 +259,7 @@ describe('clamp()', function () {
 
     // wrong type of parameters
 
-    it('throws error if one of the parametersr is null', function () {
+    it('throws error if one of the parameters is null', function () {
         const params = [
             [null, 1, 2],
             [0, null, 2],
@@ -270,7 +270,7 @@ describe('clamp()', function () {
         }
     });
 
-    it('throws error if one of the parametersr is undefined', function () {
+    it('throws error if one of the parameters is undefined', function () {
         const params = [
             [undefined, 1, 2],
             [0, undefined, 2],
@@ -281,7 +281,7 @@ describe('clamp()', function () {
         }
     });
 
-    it('throws error if one of the parametersr is NaN', function () {
+    it('throws error if one of the parameters is NaN', function () {
         const params = [
             [NaN, 1, 2],
             [0, NaN, 2],
