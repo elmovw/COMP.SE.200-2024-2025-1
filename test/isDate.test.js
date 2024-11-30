@@ -1,5 +1,5 @@
-import assert from 'node:assert'
-import isDate from '../src/isDate.js'
+import isDate from '../src/isDate.js';
+import { expect } from "chai";
 
 
 describe('isDate()', function () {
@@ -12,13 +12,13 @@ describe('isDate()', function () {
         ]
 
         for (const d of cases) {
-            const result = isDate(d)
-            assert.strictEqual(result, true)
+            const result = isDate(d);
+            expect(result).to.eql(true);
         }
     })
 
     it('returns false for trivial non-Date objects', function () {
-        const d = new Date()
+        const d = new Date();
 
         const cases = [
             '',
@@ -34,11 +34,11 @@ describe('isDate()', function () {
             d.toString(),
             d.constructor,
             Date
-        ]
+        ];
 
         for (const c of cases) {
-            const result = isDate(c)
-            assert.strictEqual(result, false)
+            const result = isDate(c);
+            expect(result).to.eql(false);
         }
     });
 
@@ -48,8 +48,8 @@ describe('isDate()', function () {
             get [Symbol.toStringTag]() {
                 return 'Date'
             }
-        }
-        const result = isDate(nastyObject)
-        assert.strictEqual(result, false)
+        };
+        const result = isDate(nastyObject);
+        expect(result).to.eql(false);
     })
 });

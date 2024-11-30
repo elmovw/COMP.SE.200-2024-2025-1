@@ -1,6 +1,5 @@
-import assert from 'node:assert'
-import add from '../src/add.js'
-
+import add from '../src/add.js';
+import { expect } from 'chai';
 
 describe('add()', function () {
 
@@ -13,7 +12,7 @@ describe('add()', function () {
     ]
 
     for (const [a, b, result] of cases) {
-      assert.equal(add(a, b), result);
+      expect(add(a, b)).to.eql(result);
     }
   });
 
@@ -25,7 +24,7 @@ describe('add()', function () {
       ["8900", "101", "8900101"]
     ]
     for (const [a, b, result] of cases) {
-      assert.equal(add(a, b), result);
+      expect(add(a, b)).to.eql(result);
     }
   })
 });
