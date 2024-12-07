@@ -37,3 +37,12 @@ jobs:
           path-to-lcov: ./coverage/lcov.info
           parallel: true
 
+  finalize:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Finish Coveralls Parallel Run
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
