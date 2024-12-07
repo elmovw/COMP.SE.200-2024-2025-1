@@ -123,6 +123,17 @@ describe('reduce()', function () {
         expect(arr3).to.eql([{ a: 1, b: 2 }]);
     });
 
+    const arrTargetLength = 100000;
+
+    it(`works with a big array (${arrTargetLength} elems)`, function () {
+        let arr = [];
+
+        for (let i = 0; i < arrTargetLength; i++) {
+            arr.push(1);
+        }
+        expect(reduce(arr, (acc, cur) => acc + cur)).to.eql(arrTargetLength);
+    })
+
     // NEGATIVE TESTS
 
     it('extra parameters do not have unexpected side-effects', function () {
