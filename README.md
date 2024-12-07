@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/elmovw/COMP.SE.200-2024-2025-1/badge.svg)](https://coveralls.io/github/elmovw/COMP.SE.200-2024-2025-1)
+
 # Student template
 
 ## Purpose of this repository
