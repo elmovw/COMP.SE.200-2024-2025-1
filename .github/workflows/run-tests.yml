@@ -30,6 +30,7 @@ jobs:
       - name: Run tests 
         run: npm test
       - name: Upload coverage report to coveralls
+        if: always()
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN}}
@@ -42,6 +43,7 @@ jobs:
     needs: test
     steps:
       - name: Finish Coveralls Parallel Run
+        if: always()
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
