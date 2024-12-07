@@ -95,6 +95,11 @@ describe('chunk()', function () {
 
     // NEGATIVE TESTS
 
+    it('extra parameters do not have unexpected side-effects', function () {
+        const res = chunk([1], 1, 2, 2, 2, 2, 2);
+        expect(res).to.deep.eql([[1]]);
+    });
+
     it('throws error if second parameter is given but is not an integer', function () {
         function name(t) {
             return t;

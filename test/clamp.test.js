@@ -348,6 +348,11 @@ describe('clamp()', function () {
 
     // NEGATIVE CASES
 
+    it('extra parameters do not have unexpected side-effects', function () {
+        let res = clamp(-5, -5, 5, 2, 2, 2, 2);
+        expect(res).to.eql(-5);
+    });
+
     it('throws error if parameters are too extreme', function () {
         expect(() => clamp(Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER + 1)).to.throw(Error);
         expect(() => clamp(Number.MIN_SAFE_INTEGER + 2, Number.MIN_SAFE_INTEGER - 1, Number.MIN_SAFE_INTEGER)).to.throw(Error);

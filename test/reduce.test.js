@@ -125,6 +125,10 @@ describe('reduce()', function () {
 
     // NEGATIVE TESTS
 
+    it('extra parameters do not have unexpected side-effects', function () {
+        expect(reduce([1, 2], (sum, n) => sum + n, 0, 2, 2, 2, 2)).to.eql(3);
+    });
+
     it('throws an error if the first parameter is not array, string or object', function () {
         const firstParamOpt = [
             1,

@@ -54,6 +54,14 @@ describe('map()', function () {
 
   // NEGATIVE CASES
 
+  it("extra parameters do not have unexpected side-effects", function () {
+    const arr = [4, 8];
+    function square(n) {
+      return n * n;
+    }
+    expect(map(arr, square, 2, 2, 2, 2, 2, 2)).to.deep.eql([16, 64]);
+  });
+
   it("throws an error if there are less than two parameters", function () {
     expect(() => map()).to.throw(Error);
     expect(() => map([])).to.throw(Error);
