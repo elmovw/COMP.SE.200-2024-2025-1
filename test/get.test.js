@@ -92,6 +92,13 @@ describe('get()', function () {
         expect(get(object, path, 'default')).to.eql('target');
     });
 
+    it('returns undefined if first parameter is null and third not given', function () {
+        expect(get(null, ['a', 'b', 'c'])).to.eql(undefined);
+    });
+
+    it('returns third parameter if first parameter is null and third is given', function () {
+        expect(get(null, ['a', 'b', 'c'], "default")).to.eql("default");
+    });
 
     // NEGATIVE TESTS
 
@@ -116,13 +123,12 @@ describe('get()', function () {
         expect(() => get(arr, ['-1'], 'default')).to.not.throw();
     });
 
-    it('throws an error if the first parameter is not an object, array or string', function () {
+    it('throws an error if the first parameter is not an object, array, string or null', function () {
         const errValues = [
             1,
             1.2,
             () => "Kissa",
             undefined,
-            null,
             NaN
         ];
         for (let i = 0; i < errValues.length; i++) {
