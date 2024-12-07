@@ -24,7 +24,7 @@ describe('chunk()', function () {
         expect(res).to.deep.eql([['a', 'b'], ['c', 'd']]);
     })
 
-    it('works without second parameter', function () {
+    it('works without second parameter – default is 1', function () {
         const res = chunk(['a', 'b', 'c', 'd']);
         expect(res).to.deep.eql([['a'], ['b'], ['c'], ['d']]);
     })
@@ -36,7 +36,7 @@ describe('chunk()', function () {
 
     it('works with arrays containing different types of elements', function () {
         const arr = [
-            {1: 1, 2:2, 3:3, b:5},
+            { 1: 1, 2: 2, 3: 3, b: 5 },
             null,
             undefined,
             NaN,
@@ -48,7 +48,7 @@ describe('chunk()', function () {
         ];
         const res = chunk(arr, 1);
         expect(res).to.deep.eql([
-            [{1: 1, 2:2, 3:3, b:5}],
+            [{ 1: 1, 2: 2, 3: 3, b: 5 }],
             [null],
             [undefined],
             [NaN],
@@ -62,7 +62,7 @@ describe('chunk()', function () {
 
     it('returns empty array if first parameter is not array or string', function () {
         const params = [
-            {1: 1, 2:2, 3:3, b:5},
+            { 1: 1, 2: 2, 3: 3, b: 5 },
             null,
             undefined,
             NaN,
@@ -70,27 +70,27 @@ describe('chunk()', function () {
             1,
             0.2
         ];
-        for (let i=0; i<params.length; i++) {
+        for (let i = 0; i < params.length; i++) {
             expect(chunk(params[i], 1)).to.deep.eql([]);
         }
     });
 
     it('returns an empty array if second parameter is integer smaller than one', function () {
         const params = [
-           0,
-           -1,
+            0,
+            -1,
         ];
-        for (let i=0; i<params.length; i++) {
+        for (let i = 0; i < params.length; i++) {
             expect(chunk(params[i], 1)).to.deep.eql([]);
         }
     });
 
     it('chunks an empty array', function () {
-        expect(chunk([,,,,,], 2)).to.deep.eql([[,,], [,,], [,]]);
+        expect(chunk([, , , , ,], 2)).to.deep.eql([[, ,], [, ,], [,]]);
     });
 
     it('chunks partially empty array', function () {
-        expect(chunk([1,,4,,,], 2)).to.deep.eql([[1,], [4,,], [,]]);
+        expect(chunk([1, , 4, , ,], 2)).to.deep.eql([[1,], [4, ,], [,]]);
     });
 
     // NEGATIVE TESTS
@@ -112,12 +112,16 @@ describe('chunk()', function () {
             [],
             {},
             [1, 2],
-            { 1: 'a'},
+            { 1: 'a' },
             () => "kissa",
             name
         ];
-        for (let i=0; i<params.length; i++) {
+        for (let i = 0; i < params.length; i++) {
             expect(() => chunk([1, 2, 3], params[i])).to.throw(Error);
         }
+    });
+
+    it('throws an error if called without arguments', function () {
+        expect(() => chunk()).to.throw(Error);
     });
 });
