@@ -1,8 +1,6 @@
 import { expect } from 'chai'
 import memoize from '../src/memoize.js'
 
-// Elmo hoitamassa
-
 /**
  * @param {Function} func the function
  * @returns {Function & { calls: number } }
@@ -83,7 +81,66 @@ describe('memoize()', function () {
         ])
     })
 
-    // it('1 + 1 = 2', function () {
-    //     assert.equal(add(1, 1), 2);
-    // });
+    it('invalid arguments throw errors', () => {
+        const func = (a, b) => a + b
+
+        const inputs = [
+            [],
+            [null, func],
+            [func, NaN]
+        ]
+
+        for (const args of inputs) {
+            expect(() => memoize(...args), `memoize(${args}) should have thrown`).to.throw()
+        }
+    })
+
+    it('custom Cache constructor is supported', () => {
+        expect(memoize.Cache).to.equal(Map)
+
+        const myCaches = []
+        function MyCache() {
+            this._map = new Map()
+            this.get = countCalls(this._map.get.bind(this._map))
+            this.set = countCalls((key, value) => {
+                this._map.set(key, value)
+                return this
+            })
+            this.has = countCalls(this._map.has.bind(this._map))
+            myCaches.push(this)
+        }
+
+        // Object.setPrototypeOf(MyCache.prototype, Map.prototype)
+
+        /**
+         * @param { string} a a string
+         */
+        const myFunc = (a) => a.toUpperCase() + '!!!'
+        memoize.Cache = MyCache
+
+        const inputs = [
+            'kissa',
+            'kissa2',
+            'kissa',
+        ]
+
+        const myMemos = []
+
+        for (let i = 0; i < 10; i++) {
+            const memoized = memoize(myFunc)
+            expect(memoized.cache).instanceOf(MyCache)
+            expect(memoized.cache.get.calls).to.equal(0)
+            expect(myCaches.at(-1) === memoized.cache)
+            for (let j = 0; j < 100; j++) {
+                inputs.map(memoized)
+            }
+
+            expect(memoized.cache).instanceOf(MyCache)
+            expect(memoized.cache.get.calls).to.equal(298)
+            expect(memoized.cache.has.calls).to.equal(100*inputs.length)
+            expect(memoized.cache.set.calls).to.equal(2)
+            myMemos.push(memoized)
+        }
+        memoize.Cache = Map
+    })
 });
