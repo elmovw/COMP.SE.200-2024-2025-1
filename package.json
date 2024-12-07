@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "c8 mocha",
-    "coverage_disabled": "report --reporter=text-lcov | coveralls"
+    "test": "c8 --reporter=text --reporter=lcov mocha"
   },
   "author": "",
   "license": "MIT",
