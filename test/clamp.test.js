@@ -13,21 +13,21 @@ describe('clamp()', function () {
             res = clamp(-10.0, -5.0, 5.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps positive input number outside of limits', function () {
             let res = clamp(10, -5, 5);
             expect(res).to.eql(5);
-            res = clamp(10.0 -5.0, 5.0);
+            res = clamp(10.0 - 5.0, 5.0);
             expect(res).to.eql(5.0);
         });
-    
+
         it('clamps negative input between limits to itself', function () {
             let res = clamp(-2, -5, 5);
             expect(res).to.eql(-2);
             res = clamp(-2.0, -5.0, 5.0);
             expect(res).to.eql(-2.0);
         });
-    
+
         it('clamps positive input between limits to itself', function () {
             let res = clamp(2, -5, 5);
             expect(res).to.eql(2);
@@ -41,14 +41,14 @@ describe('clamp()', function () {
             res = clamp(0.0, -5.0, 5.0);
             expect(res).to.eql(0.0);
         });
-    
+
         it('clamps lower limit to itself', function () {
             let res = clamp(-5, -5, 5);
             expect(res).to.eql(-5);
             res = clamp(-5.0, -5.0, 5.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps upper limit to itself', function () {
             let res = clamp(5, -5, 5);
             expect(res).to.eql(5);
@@ -64,7 +64,7 @@ describe('clamp()', function () {
             res = clamp(-10.0, 1.0, 5.0);
             expect(res).to.eql(1.0);
         });
-    
+
         it('clamps positive input number over the upper limit', function () {
             let res = clamp(10, 1, 5);
             expect(res).to.eql(5);
@@ -81,14 +81,14 @@ describe('clamp()', function () {
             let res = clamp(0.0, 1.0, 5.0);
             expect(res).to.eql(1.0);
         });
-    
+
         it('clamps number input between limits to itself', function () {
             let res = clamp(2, 1, 5);
             expect(res).to.eql(2);
             res = clamp(2.0, 1.0, 5.0);
             expect(res).to.eql(2.0);
         });
-    
+
         it('clamps lower limit to itself', function () {
             let res = clamp(-5, 1, 5);
             expect(res).to.eql(-5);
@@ -97,7 +97,7 @@ describe('clamp()', function () {
             res = clamp(-5.0, 1.0, 5.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps upper limit to itself', function () {
             let res = clamp(5, 1, 5);
             expect(res).to.eql(5);
@@ -113,7 +113,7 @@ describe('clamp()', function () {
             res = clamp(10.0, -10.0, -5.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps negative input number over the upper limit', function () {
             let res = clamp(-3, -10, -5);
             expect(res).to.eql(-5);
@@ -134,21 +134,21 @@ describe('clamp()', function () {
             res = clamp(0.0, -10.0, -5.0)
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps number between limits to itself', function () {
             let res = clamp(-6, -10, -5)
             expect(res).to.eql(-6);
             res = clamp(-6.0, -10.0, -5.0)
             expect(res).to.eql(-6.0);
         });
-    
+
         it('clamps lower limit to itself', function () {
             let res = clamp(-10, -10, -5)
             expect(res).to.eql(-10);
             res = clamp(-10.0, -10.0, -5.0);
             expect(res).to.eql(-10.0);
         });
-    
+
         it('clamps upper limit to itself', function () {
             let res = clamp(-5, -10, -5)
             expect(res).to.eql(-5);
@@ -164,28 +164,28 @@ describe('clamp()', function () {
             res = clamp(-10.0, 0.0, 5.0);
             expect(res).to.eql(0.0);
         });
-    
+
         it('clamps number over the upper limit', function () {
             let res = clamp(6, 0, 5);
             expect(res).to.eql(5);
             res = clamp(6.0, 0.0, 5.0);
             expect(res).to.eql(5.0);
         });
-    
+
         it('clamps number between limits to itself', function () {
             let res = clamp(3, 0, 5);
             expect(res).to.eql(3);
             res = clamp(3.0, 0.0, 5.0);
             expect(res).to.eql(3.0);
         });
-    
+
         it('clamps lower limit to itself', function () {
             let res = clamp(0, 0, 5);
             expect(res).to.eql(0);
             res = clamp(0.0, 0.0, 5.0);
             expect(res).to.eql(0.0);
         });
-    
+
         it('clamps upper limit to itself', function () {
             let res = clamp(5, 0, 5);
             expect(res).to.eql(5);
@@ -202,29 +202,29 @@ describe('clamp()', function () {
             res = clamp(10.0, -5.0, 0.0);
             expect(res).to.eql(0.0);
         });
-    
+
         it('clamps number under the lower limit', function () {
             let res = clamp(-6, -5, 0);
             expect(res).to.eql(-5);
             res = clamp(-6.0, -5.0, 0.0);
             expect(res).to.eql(-5.0);
-            
+
         });
-    
+
         it('clamps number between limits to itself', function () {
             let res = clamp(-3, -5, 0);
             expect(res).to.eql(-3);
             res = clamp(-3.0, -5.0, 0.0);
             expect(res).to.eql(-3.0);
         });
-    
+
         it('clamps lower limit to itself', function () {
             let res = clamp(-5, -5, 0);
             expect(res).to.eql(-5);
             res = clamp(-5.0, -5.0, 0.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps upper limit to itself', function () {
             let res = clamp(0, -5, 0);
             expect(res).to.eql(0);
@@ -233,7 +233,7 @@ describe('clamp()', function () {
         });
     });
 
-    
+
     describe('with two same positive limits', function () {
         it('clamps negative input number outside of limits', function () {
             let res = clamp(-10, 5, 5);
@@ -241,7 +241,7 @@ describe('clamp()', function () {
             res = clamp(-10.0, 5.0, 5.0);
             expect(res).to.eql(5.0);
         });
-    
+
         it('clamps number over the upper limit', function () {
             let res = clamp(10, 5, 5);
             expect(res).to.eql(5);
@@ -262,7 +262,7 @@ describe('clamp()', function () {
             res = clamp(0.0, 5.0, 5.0);
             expect(res).to.eql(5.0);
         });
-    
+
         it('clamps limit to itself', function () {
             let res = clamp(5, 5, 5);
             expect(res).to.eql(5);
@@ -278,7 +278,7 @@ describe('clamp()', function () {
             res = clamp(10.0, -5.0, -5.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps negative input number over the limit', function () {
             let res = clamp(-3, -5, -5);
             expect(res).to.eql(-5);
@@ -299,9 +299,9 @@ describe('clamp()', function () {
             res = clamp(0.0, -5.0, -5.0);
             expect(res).to.eql(-5.0);
         });
-    
+
         it('clamps limit to itself', function () {
-            const res = clamp(-5, -5 -5);
+            const res = clamp(-5, -5 - 5);
             expect(res).to.eql(-5);
         });
     });
@@ -313,7 +313,7 @@ describe('clamp()', function () {
             res = clamp(10.0, 0.0, 0.0);
             expect(res).to.eql(0.0);
         });
-    
+
         it('clamps negative', function () {
             let res = clamp(-3, 0, 0);
             expect(res).to.eql(0);
@@ -339,20 +339,20 @@ describe('clamp()', function () {
     });
 
     it('clamps big number with extreme (but safe) limits', function () {
-        let res = clamp(Number.MAX_SAFE_INTEGER-2, Number.MAX_SAFE_INTEGER-2, Number.MAX_SAFE_INTEGER);
-        expect(res).to.eql(Number.MAX_SAFE_INTEGER-1);
-        res = clamp(Number.MIN_SAFE_INTEGER+2, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER+1);
+        let res = clamp(Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER);
+        expect(res).to.eql(Number.MAX_SAFE_INTEGER - 1);
+        res = clamp(Number.MIN_SAFE_INTEGER + 2, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER + 1);
         expect(res).to.eql(Number.MIN_SAFE_INTEGER);
     });
-    
+
 
     // NEGATIVE CASES
 
     it('throws error if parameters are too extreme', function () {
-        expect(() => clamp(Number.MAX_SAFE_INTEGER-2, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER+1)).to.throw(Error);
-        expect(() => clamp(Number.MIN_SAFE_INTEGER+2, Number.MIN_SAFE_INTEGER-1, Number.MIN_SAFE_INTEGER)).to.throw(Error);
-        expect(() => clamp(Number.MAX_SAFE_INTEGER+1, Number.MAX_SAFE_INTEGER-1, Number.MAX_SAFE_INTEGER)).to.throw(Error);
-        expect(() => clamp(Number.MIN_SAFE_INTEGER-1, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER+1)).to.throw(Error);
+        expect(() => clamp(Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER + 1)).to.throw(Error);
+        expect(() => clamp(Number.MIN_SAFE_INTEGER + 2, Number.MIN_SAFE_INTEGER - 1, Number.MIN_SAFE_INTEGER)).to.throw(Error);
+        expect(() => clamp(Number.MAX_SAFE_INTEGER + 1, Number.MAX_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER)).to.throw(Error);
+        expect(() => clamp(Number.MIN_SAFE_INTEGER - 1, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER + 1)).to.throw(Error);
     });
 
     it('throws error if limits are negative but wrong way around', function () {
@@ -362,9 +362,15 @@ describe('clamp()', function () {
             [-3, 9, 0],
             [-3, 4, 1],
         ];
-        for (let i = 0; i<params.length; i++) {
-            expect(() => clamp(...params[i])).to.throw(Error);  
+        for (let i = 0; i < params.length; i++) {
+            expect(() => clamp(...params[i])).to.throw(Error);
         }
+    });
+
+    it('throws an error if called with less parameters than three', function () {
+        expect(() => clamp()).to.throw(Error);
+        expect(() => clamp(1)).to.throw(Error);
+        expect(() => clamp(1, 2)).to.throw(Error);
     });
 
     // wrong type of parameters
@@ -372,7 +378,7 @@ describe('clamp()', function () {
     it('throws error if some of the parameters is not number', function () {
         const params = [
             {},
-            {"kissa": 2},
+            { "kissa": 2 },
             undefined,
             NaN,
             null,
@@ -381,7 +387,7 @@ describe('clamp()', function () {
             "",
             "1"
         ];
-        for (let i = 0; i<params.length; i++) {
+        for (let i = 0; i < params.length; i++) {
             expect(() => clamp(params[i], 2, 3)).to.throw(Error);
             expect(() => clamp(1, params[i], 3)).to.throw(Error);
             expect(() => clamp(1, 2, params[i])).to.throw(Error);
