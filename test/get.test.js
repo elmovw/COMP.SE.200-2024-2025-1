@@ -23,7 +23,7 @@ describe('get()', function () {
 
     it('works with a path more shallow than the nesting in the search object', function () {
         const object = { 'a': [{ 'b': { 'c': 3 } }] };
-        expect(get(object, 'a[0].b', 'default')).to.eql({ 'c': 3 });
+        expect(get(object, 'a[0].b', 'default')).to.deep.eql({ 'c': 3 });
     });
 
     it('gets a value from an existing path expressed as an array of keys from a nested object containing an array', function () {
@@ -64,7 +64,7 @@ describe('get()', function () {
 
     it('interprets a number in brackets in the path string as a literal key or an index based on context', function () {
         const object = { '0': 'a', '[0]': [1, 2] };
-        expect(get(object, '[0]', 'default')).to.eql([1, 2]);
+        expect(get(object, '[0]', 'default')).to.deep.eql([1, 2]);
         const object2 = [1, 2];
         expect(get(object2, '[0]', 'default')).to.eql(1);
         const object3 = { '0': [1, 2], '[0]': [3, 4] };
