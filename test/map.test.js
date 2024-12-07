@@ -44,12 +44,15 @@ describe('map()', function () {
     expect(map(arr, length)).to.deep.eql([5, 2]);
   });
 
-  it("does nothing to empty elements", function () {
+  it("handles empty elements predictably", function () {
     const arr = [4, , , 8];
     function square(n) {
+      if (n === undefined) {
+        return "kissa"
+      }
       return n * n;
     }
-    expect(map(arr, square)).to.deep.eql([16, , , 64]);
+    expect(map(arr, square)).to.deep.eql([16, 'kissa', 'kissa', 64]);
   });
 
   // NEGATIVE CASES
