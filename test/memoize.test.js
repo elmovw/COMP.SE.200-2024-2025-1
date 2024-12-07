@@ -58,7 +58,6 @@ describe('memoize()', function () {
         let outputs = cases.map(([args, _o]) => memoized(...args))
         const expected = cases.map(([_args, o]) => o)
 
-        console.log(memoized.cache)
         expect(outputs).to.deep.equal(expected)
         expect(counter.calls).to.equal(2)
     })
