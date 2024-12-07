@@ -1,19 +1,6 @@
 import { expect } from 'chai'
 import memoize from '../src/memoize.js'
-
-/**
- * @param {Function} func the function
- * @returns {Function & { calls: number } }
- */
-function countCalls(func) {
-    function wrapped(...args) {
-        wrapped.calls += 1
-        return func(...args)
-    }
-    wrapped.calls = 0
-    return wrapped
-}
-
+import { countCalls } from './util.js'
 
 describe('memoize()', function () {
     it('function calls work with various arguments', () => {
