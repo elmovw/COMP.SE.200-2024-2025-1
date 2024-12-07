@@ -80,10 +80,11 @@ describe('get()', function () {
         expect(get(object, 'a[0]b.c')).to.eql(3);
     });
 
-    it('works with deeply nested object', function () {
+    const nestingLevel = 1000;
+
+    it(`works with deeply nested object (nesting level ${nestingLevel})`, function () {
         let object = 'target';
         let path = [];
-        const nestingLevel = 1000;
         for (let i = 0; i < nestingLevel; i++) {
             object = { a: object };
             path.push('a');
