@@ -7,7 +7,7 @@ describe('isDate()', function () {
         const cases = [
             new Date(),
             new Date(0),
-            new Date('2024-30-11'),
+            new Date('2024-11-30'),
             new Date(''), // Invalid Date, but still a Date object
         ]
 
@@ -23,6 +23,8 @@ describe('isDate()', function () {
         const cases = [
             '',
             'Date',
+            '2024-11-30',
+            'Mon April 23 2012',
             'a',
             undefined,
             NaN,
