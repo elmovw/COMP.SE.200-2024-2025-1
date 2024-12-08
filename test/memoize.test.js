@@ -22,11 +22,10 @@ describe('memoize()', function () {
         expect(wrapped.calls).to.equal(cases.length)
     })
 
-    it('default behavior caches results from the first argument', () =>{
+    it('default behavior caches results from the first argument', () => {
         const myFunc = (host, port) => `${host}:${port}`
         const counter = countCalls(myFunc)
-        const cacheKeyFunc = (host, port) => host
-        const memoized = memoize(counter, cacheKeyFunc)
+        const memoized = memoize(counter)
 
         expect(memoized.cache).to.be.a('Map')
 
@@ -96,8 +95,6 @@ describe('memoize()', function () {
             this.has = countCalls(this._map.has.bind(this._map))
             myCaches.push(this)
         }
-
-        // Object.setPrototypeOf(MyCache.prototype, Map.prototype)
 
         /**
          * @param { string} a a string
