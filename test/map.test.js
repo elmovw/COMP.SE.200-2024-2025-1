@@ -101,10 +101,9 @@ describe('map()', function () {
       "kissa",
       ""
     ];
-    function length(n) {
-      return n.length;
+    for (let i = 0; i < params.length; i++) {
+      expect(() => map([1, 2], params[i])).to.throw(Error);
     }
-    expect(() => map([1, 2], length)).to.throw(Error);
   });
 
   it("throws an error if function cannot be applied to elements", function () {
