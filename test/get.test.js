@@ -124,15 +124,30 @@ describe('get()', function () {
     });
 
     it('throws an error if the first parameter is not an object, array, string or null', function () {
-        const errValues = [
+        const params = [
             1,
             1.2,
             () => "Kissa",
             undefined,
             NaN
         ];
-        for (let i = 0; i < errValues.length; i++) {
-            expect(() => get(errValues[i], '0', 'default')).to.throw(Error);
+        for (let i = 0; i < params.length; i++) {
+            expect(() => get(params[i], '0', 'default')).to.throw(Error);
+        }
+    });
+
+    it('throws an error if the second parameter is not a proper path', function () {
+        const params = [
+            1,
+            1.2,
+            () => "Kissa",
+            undefined,
+            NaN,
+            {},
+            null
+        ];
+        for (let i = 0; i < params.length; i++) {
+            expect(() => get({}, params[i], 'default')).to.throw(Error);
         }
     });
 });
