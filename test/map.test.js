@@ -1,7 +1,7 @@
 import map from '../src/map.js';
 import { expect } from "chai";
 
-describe('map()', function () {
+describe.only('map()', function () {
 
   it("can map integer array to their squares with squaring function", function () {
     const arr = [4, 8];
@@ -82,7 +82,7 @@ describe('map()', function () {
       return n.length;
     }
     for (let i = 0; i < params.length; i++) {
-      expect(() => map(2, length)).to.throw(Error);
+      expect(() => map(params[i], length)).to.throw(Error);
     }
   });
 
