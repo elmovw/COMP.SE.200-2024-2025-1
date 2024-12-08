@@ -171,8 +171,10 @@ describe('reduce()', function () {
         }
     });
 
-    it('throws an error if no initial value is given, and the first value of the array is undefined', function () {
-        expect(() => reduce([undefined, 1, 2], (sum, n) => sum + n)).to.throw(Error);
+    it('throws an error if no initial value is given, and the first value is empty array, object or string', function () {
+        expect(() => reduce([], (sum, n) => sum + n)).to.throw(Error);
+        expect(() => reduce({}, (sum, n) => sum + n)).to.throw(Error);
+        expect(() => reduce("", (sum, n) => sum + n)).to.throw(Error);
     });
 
     it('thows an error mid-execution if function can not be applied to an item in the array', function () {
