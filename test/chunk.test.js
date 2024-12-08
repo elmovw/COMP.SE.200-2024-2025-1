@@ -92,11 +92,13 @@ describe('chunk()', function () {
         expect(res).to.deep.eql([[1]]);
     });
 
-    it('throws error if second parameter is given but is not an integer', function () {
+    it('throws error if second parameter is given but is not an integer greater than zero', function () {
         function name(t) {
             return t;
         }
         const params = [
+            0,
+            -2,
             0.5,
             1.2,
             7.9,
