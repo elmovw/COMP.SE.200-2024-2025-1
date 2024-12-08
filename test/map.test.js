@@ -78,11 +78,11 @@ describe.only('map()', function () {
       null,
       () => "kissa"
     ];
-    function length(n) {
-      return n.length;
+    function foo(n) {
+      return n;
     }
     for (let i = 0; i < params.length; i++) {
-      expect(() => map(params[i], length)).to.throw(Error);
+      expect(() => map(params[i], foo)).to.throw(Error);
     }
   });
 
