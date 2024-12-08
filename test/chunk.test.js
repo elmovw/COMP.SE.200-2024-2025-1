@@ -60,21 +60,6 @@ describe('chunk()', function () {
         ]);
     })
 
-    it('returns empty array if first parameter is not array or string', function () {
-        const params = [
-            { 1: 1, 2: 2, 3: 3, b: 5 },
-            null,
-            undefined,
-            NaN,
-            {},
-            1,
-            0.2
-        ];
-        for (let i = 0; i < params.length; i++) {
-            expect(chunk(params[i], 1)).to.deep.eql([]);
-        }
-    });
-
     it('returns an empty array if second parameter is integer smaller than one', function () {
         const params = [
             0,
@@ -85,15 +70,22 @@ describe('chunk()', function () {
         }
     });
 
-    it('chunks an empty array', function () {
-        expect(chunk([, , , , ,], 2)).to.deep.eql([[, ,], [, ,], [,]]);
-    });
-
-    it('chunks partially empty array', function () {
-        expect(chunk([1, , 4, , ,], 2)).to.deep.eql([[1,], [4, ,], [,]]);
-    });
-
     // NEGATIVE TESTS
+
+    it('throws an error if the first parameter is not array or string', function () {
+        const params = [
+            { 1: 1, 2: 2, 3: 3, b: 5 },
+            null,
+            undefined,
+            NaN,
+            {},
+            1,
+            0.2
+        ];
+        for (let i = 0; i < params.length; i++) {
+            expect(() => chunk(params[i], 1)).to.throw(Error);
+        }
+    });
 
     it('extra parameters do not have unexpected side-effects', function () {
         const res = chunk([1], 1, 2, 2, 2, 2, 2);
