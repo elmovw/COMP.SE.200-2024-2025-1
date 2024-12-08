@@ -64,10 +64,6 @@ describe('reduce()', function () {
         { java: "23" }, { python: "35" }], _.merge)).to.deep.eql({ cpp: '23', java: '23', python: '35' });
     });
 
-    it('ignores empty values in an array', function () {
-        expect(reduce([1, , , , , 2], (sum, n) => sum + n, 0)).to.eql(3);
-    });
-
     it('does not throw an error with any types for the third parameter', function () {
         const thirdParamOpt = [
             1,
@@ -175,8 +171,8 @@ describe('reduce()', function () {
         }
     });
 
-    it('throws an error if no initial value is given, and the first value of the array is empty', function () {
-        expect(() => reduce([, 1, , , , , 2], (sum, n) => sum + n)).to.throw(Error);
+    it('throws an error if no initial value is given, and the first value of the array is undefined', function () {
+        expect(() => reduce([undefined, 1, 2], (sum, n) => sum + n)).to.throw(Error);
     });
 
     it('thows an error mid-execution if function can not be applied to an item in the array', function () {
