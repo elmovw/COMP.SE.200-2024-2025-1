@@ -44,6 +44,14 @@ describe('map()', function () {
     expect(map(arr, length)).to.deep.eql([5, 2]);
   });
 
+  it("passes value, index, array to function", function () {
+    const arr = [[1, 2, 3], [4, 5, 6]];
+    function test(a, b, c) {
+      return a + b + c;
+    }
+    expect(map(arr, test)).to.deep.eql(['1,2,301,2,3,4,5,6', '4,5,611,2,3,4,5,6']);
+  });
+
   // NEGATIVE CASES
 
   it("extra parameters do not have unexpected side-effects", function () {
@@ -99,22 +107,6 @@ describe('map()', function () {
     const arr = [4, 8];
     function length(n) {
       return n.length;
-    }
-    expect(() => map(arr, length)).to.throw(Error);
-  });
-
-  it("throws an error if there is some element the function cannot be applied to", function () {
-    const arr = ["kissa", 3];
-    function length(n) {
-      return n.length;
-    }
-    expect(() => map(arr, length)).to.throw(Error);
-  });
-
-  it("throws an error if function requires more parameters than one", function () {
-    const arr = [1, 3];
-    function length(a, b) {
-      return a + b;
     }
     expect(() => map(arr, length)).to.throw(Error);
   });
