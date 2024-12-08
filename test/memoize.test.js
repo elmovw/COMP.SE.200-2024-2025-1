@@ -6,6 +6,7 @@ describe('memoize()', function () {
     it('function calls work with various arguments', () => {
         const myFunc = (a) => a + 'a'
         const wrapped = countCalls(myFunc)
+        const memoized = memoize(wrapped)
 
         // [input, output]
         const cases = [
@@ -15,11 +16,37 @@ describe('memoize()', function () {
             [null, 'nulla'],
             [-1, '-1a']
         ]
-        let outputs = cases.map(([i, _o]) => wrapped(i))
+        let outputs = cases.map(([i, _o]) => memoized(i))
         const expected = cases.map(([_i, o]) => o)
 
         expect(outputs).to.deep.equal(expected)
         expect(wrapped.calls).to.equal(cases.length)
+    })
+
+    it('everything works with memoize.Cache = undefined', () => {
+        const myFunc = (a) => a + 'a'
+        const originalCacheImpl = memoize.Cache
+        memoize.Cache = undefined
+        const wrapped = countCalls(myFunc)
+        const memoized = memoize(wrapped)
+
+        expect(memoized.cache).instanceOf(Map)
+
+        // [input, output]
+        const cases = [
+            [1, '1a'],
+            [undefined, 'undefineda'],
+            [NaN, 'NaNa'],
+            [null, 'nulla'],
+            [-1, '-1a']
+        ]
+        let outputs = cases.map(([i, _o]) => memoized(i))
+        const expected = cases.map(([_i, o]) => o)
+
+        expect(outputs).to.deep.equal(expected)
+        expect(wrapped.calls).to.equal(cases.length)
+
+        memoize.Cache = originalCacheImpl
     })
 
     it('default behavior caches results from the first argument', () => {
@@ -90,7 +117,8 @@ describe('memoize()', function () {
             this.get = countCalls(this._map.get.bind(this._map))
             this.set = countCalls((key, value) => {
                 this._map.set(key, value)
-                return this
+                // returning nothing will trigger the alternate branch in memoize.js
+                // return this
             })
             this.has = countCalls(this._map.has.bind(this._map))
             myCaches.push(this)
