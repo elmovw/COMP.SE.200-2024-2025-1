@@ -138,6 +138,8 @@ describe('get()', function () {
 
     it('throws an error if the second parameter is not a proper path', function () {
         const params = [
+            [1, 2],
+            [() => "foo"],
             1,
             1.2,
             () => "Kissa",
