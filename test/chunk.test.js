@@ -14,9 +14,9 @@ describe('chunk()', function () {
         expect(res).to.deep.eql([[1, 2, 3, 4, 5, 6, 7]]);
     });
 
-    it('returns the input array as-is, if chunk size is greater than array length', function () {
+    it('returns the input array inside an array, if chunk size is greater than array length', function () {
         const res = chunk([1, 2, 3, 4, 5, 6, 7], 10);
-        expect(res).to.deep.eql([1, 2, 3, 4, 5, 6, 7]);
+        expect(res).to.deep.eql([[1, 2, 3, 4, 5, 6, 7]]);
     });
 
     it('chunks array of letters', function () {
