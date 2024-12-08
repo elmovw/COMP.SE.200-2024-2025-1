@@ -91,11 +91,11 @@ describe('clamp()', function () {
 
         it('clamps lower limit to itself', function () {
             let res = clamp(-5, 1, 5);
-            expect(res).to.eql(-5);
+            expect(res).to.eql(1);
             res = clamp(-5.0, 1.0, 5.0);
-            expect(res).to.eql(-5.0);
+            expect(res).to.eql(1.0);
             res = clamp(-5.0, 1.0, 5.0);
-            expect(res).to.eql(-5.0);
+            expect(res).to.eql(1.0);
         });
 
         it('clamps upper limit to itself', function () {
@@ -339,10 +339,10 @@ describe('clamp()', function () {
     });
 
     it('clamps big number with extreme (but safe) limits', function () {
-        let res = clamp(Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER);
+        let res = clamp(Number.MAX_SAFE_INTEGER - 2, Number.MAX_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER);
         expect(res).to.eql(Number.MAX_SAFE_INTEGER - 1);
         res = clamp(Number.MIN_SAFE_INTEGER + 2, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER + 1);
-        expect(res).to.eql(Number.MIN_SAFE_INTEGER);
+        expect(res).to.eql(Number.MIN_SAFE_INTEGER + 1);
     });
 
 
