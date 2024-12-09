@@ -58,7 +58,7 @@ describe('every()', function () {
         }
     });
 
-    it('returns false when first or last element of element in the middle of array valuates to false', () => {
+    it('returns false when first or last element of element in the middle of array evaluates to false', () => {
         for (let i = 0; i < 3; i++) {
             function test(_value, index) {
                 if (index == i) {
