@@ -82,7 +82,6 @@ describe('filter()', function () {
             {},
         ];
         for (let i = 0; i < firstParamOpt.length; i++) {
-            console.log(firstParamOpt[i]);
             expect(() => filter(firstParamOpt[i], () => true)).to.throw(Error);
         }
     });
