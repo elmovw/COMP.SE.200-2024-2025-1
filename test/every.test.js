@@ -105,7 +105,6 @@ describe('every()', function () {
             {},
         ];
         for (let i = 0; i < firstParamOpt.length; i++) {
-            console.log(firstParamOpt[i]);
             expect(() => every(firstParamOpt[i], () => true)).to.throw(Error);
         }
     });
