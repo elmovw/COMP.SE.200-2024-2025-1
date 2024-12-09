@@ -68,4 +68,41 @@ describe('filter()', function () {
         const result = filter(input, predicate)
         expect(result).to.deep.equal(expectedOutput)
     })
+
+    // NEGATIVE TESTS
+
+    it('throws an error if the first parameter is not array or string', function () {
+        const firstParamOpt = [
+            null,
+            undefined,
+            1,
+            1.1,
+            () => "kissa",
+            NaN,
+            {},
+        ];
+        for (let i = 0; i < firstParamOpt.length; i++) {
+            console.log(firstParamOpt[i]);
+            expect(() => filter(firstParamOpt[i], () => true)).to.throw(Error);
+        }
+    });
+
+    it('throws an error if the second parameter is not a function', function () {
+        const secondParamOpt = [
+            1,
+            1.1,
+            undefined,
+            NaN,
+            null,
+            [1, 2],
+            [],
+            {},
+            { "a": 1 },
+            "kissa",
+            ""
+        ];
+        for (let i = 0; i < secondParamOpt.length; i++) {
+            expect(() => filter([1, 2, 3], secondParamOpt[i])).to.throw(Error);
+        }
+    });
 });
