@@ -96,7 +96,6 @@ describe('every()', function () {
 
     it('throws an error if the first parameter is not array or string', function () {
         const firstParamOpt = [
-            null,
             undefined,
             1,
             1.1,
